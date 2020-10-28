@@ -1,0 +1,31 @@
+name: Docker
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  IMAGE_NAME: appdynamics-javascript-agent
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker Lint
+        uses: luke142367/Docker-Lint-Action@v1.1.1
+        with:
+          target: Dockerfile
+      - name: Build docker image
+        run: |
+          docker build -t $IMAGE_NAME .
+
