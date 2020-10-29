@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  appdynamics-javascript-agent:
+    build:
+      context: .
+    image: forgeqc/appdynamics-javascript-agent
+    ports:
+      - 8080:8080/tcp
+    privileged: false
+    networks:
+      - cdn_net
+
+networks:
+  cdn_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
