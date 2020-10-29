@@ -45,11 +45,11 @@ jobs:
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into Docker Hub Container Registry
-        run: pwd
+        run: echo ${{ secrets.dockerhub_password }} | docker login -u ${{ secrets.dockerhub_login }} --password-stdin
 
-      - name: Push image to GitHub Container Registry
+      - name: Push image to Docker Hub Container Registry
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          IMAGE_ID=forgeqc/$IMAGE_NAME
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           # Strip git ref prefix from version
@@ -60,5 +60,6 @@ jobs:
           [ "$VERSION" == "$default-branch" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-          echo ${{ secrets.dockerhub_password }} | docker login -u ${{ secrets.dockerhub_login }} --password-stdin
+          docker push $IMAGE_ID:$VERSION
+          
 
