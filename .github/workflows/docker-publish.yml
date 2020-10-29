@@ -34,7 +34,7 @@ jobs:
       - name: Test adrum-latest.js download from container
         uses: wei/curl@master
         with:
-          args: http://localhost:8080/adrum/adrum-latest.js
+          args: http://cdn_appdynamics-javascript-agent_1:8080/adrum/adrum-latest.js
 
   push:
     needs: test
