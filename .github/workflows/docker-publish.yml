@@ -13,6 +13,7 @@ on:
 
 env:
   IMAGE_NAME: appdynamics-javascript-agent
+  IMAGE_ID: forgeqc/appdynamics-javascript-agent
 
 jobs:
   # Run tests.
@@ -49,7 +50,6 @@ jobs:
 
       - name: Push image to Docker Hub Container Registry
         run: |
-          IMAGE_ID=forgeqc/$IMAGE_NAME
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           # Strip git ref prefix from version
@@ -62,5 +62,11 @@ jobs:
           echo VERSION=$VERSION
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
-          
+
+      - name: Push readme.md as Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: $IMAGE_ID          
 
