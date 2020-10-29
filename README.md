@@ -1,11 +1,11 @@
-# Appdynamics EUM agent
+# Appdynamics javascript agent
 Nginx docker image hosting all of the `cdn.appdynamics.com` javascript EUM agent files required for on-premises deployment Embedded Appdynamics javascript agent version is [20.10.0.3321](https://docs.appdynamics.com/display/PRO45/Agent+Enhancements)
 
 ## Usage
 Nginx is configured to run as an unprivileged user and is as such listening on `TCP/8080` port by default.
 
 ```
-docker run -p8080:8080 -d forgeqc/appdynamics-eum-agent
+docker run -p8080:8080 -d forgeqc/appdynamics-javascript-agent
 ```
 
 ## Agent integration
