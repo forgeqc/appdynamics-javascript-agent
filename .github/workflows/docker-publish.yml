@@ -38,8 +38,7 @@ jobs:
   push:
     needs: test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    on: tags
+    if: github.event_name == 'push' && contains(github.ref, "tags")
     steps:
       - uses: actions/checkout@v2
       - name: Build image
