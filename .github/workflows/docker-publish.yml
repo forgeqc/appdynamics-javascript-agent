@@ -32,9 +32,8 @@ jobs:
           docker-compose --file docker-compose.test.yml build
           docker-compose --file docker-compose.test.yml up -d
       - name: Test adrum-latest.js download from container
-        uses: wei/curl@master
-        with:
-          args: http://appdynamics-javascript-agent_cdn_1:8080/adrum/adrum-latest.js
+        run: |
+          curl --fail http://appdynamics-javascript-agent_cdn_1:8080/adrum/adrum-latest.js
 
   push:
     needs: test
