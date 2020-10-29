@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  appdynamics-javascript-agent:
+  cdn:
     build:
       context: .
     image: forgeqc/appdynamics-javascript-agent
