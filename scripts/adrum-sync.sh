@@ -15,6 +15,11 @@ for ADRUM in $ADRUM_LIST; do
     VERSION=`head -n1 $DIR/../target/adrum/$ADRUM_FILENAME | cut -d " " -f 3`
 
     #Download adrum-ext.*.js & adrum-xd.*.html files correspnding to adrum-*.js version
-    wget -q -P $DIR/../target/adrum-ext/ http://cdn.appdynamics.com/adrum-ext.$VERSION.js
-    wget -q -P $DIR/../target/adrum-xd/ http://cdn.appdynamics.com/adrum-xd.$VERSION.html
+    wget -q -P $DIR/../target/ http://cdn.appdynamics.com/adrum-ext.$VERSION.js
+    wget -q -P $DIR/../target/ http://cdn.appdynamics.com/adrum-xd.$VERSION.html
 done
+
+# Cleanup duplicate downloads
+rm -f $DIR/../target/*.js.*
+rm -f $DIR/../target/*.js.*
+rm -f $DIR/../target/*.html.*
