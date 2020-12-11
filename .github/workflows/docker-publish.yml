@@ -30,6 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
       - name: Build and run docker image
         run: |
+          scripts/adrum-sync.sh
           docker-compose --file docker-compose.test.yml build
           docker-compose --file docker-compose.test.yml up -d
       - name: Test adrum-latest.js download from container
@@ -43,7 +44,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: |
+          scripts/adrum-sync.sh
+          docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into Docker Hub Container Registry
         run: echo ${{ secrets.dockerhub_password }} | docker login -u ${{ secrets.dockerhub_login }} --password-stdin
