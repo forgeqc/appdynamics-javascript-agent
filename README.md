@@ -1,6 +1,11 @@
 # Appdynamics javascript agent
 Nginx docker image hosting all of the `cdn.appdynamics.com` javascript EUM agent files required for on-premises deployment.
 
+## Current version
+Current version is **adrum-21.7.0.3493.js"
+
+To update the image published on docker hub, update the version number in this Readme, merge into master, and create a new tag for this version.
+
 ## Usage
 Nginx is configured to run as an unprivileged user and is as such listening on `TCP/8080` port by default.
 
@@ -9,7 +14,7 @@ docker run -p8080:8080 -d forgeqc/appdynamics-javascript-agent
 ```
 
 ## Agent integration
-The javascript agent has to be loaded synchronousl
+The javascript agent has to be loaded synchronously
 
 ```
 <html xmlns="http://www.w3.org/1999/xhtml">
